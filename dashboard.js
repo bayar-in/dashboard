@@ -58,19 +58,23 @@ function logout() {
 
 // Fungsi untuk memeriksa status login
 function checkLoginStatus() {
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  const isLoggedIn = getCookie("login");
 
   // Jika belum login, tampilkan alert dan redirect ke halaman login
-  if (isLoggedIn !== "true") {
-    Swal.fire({
-      title: "Akses Ditolak",
-      text: "Anda belum login. Silakan login terlebih dahulu.",
-      icon: "warning",
-      confirmButtonText: "OK",
-    }).then(() => {
-      window.location.href = "/login";
-    });
-  }
+  if (isLoggedIn) {
+        // Jika cookie ada, redirect ke dashboard
+        window.location.href = "/dashboard"; // Ganti dengan URL dashboard Anda
+    } else {
+        // Jika cookie tidak ada, tampilkan alert atau lakukan tindakan lain
+        Swal.fire({
+            title: "Akses Ditolak",
+            text: "Anda belum login. Silakan login terlebih dahulu.",
+            icon: "warning",
+            confirmButtonText: "OK",
+        }).then(() => {
+            window.location.href = "/login"; // Redirect ke halaman login
+        });
+    }
 }
 
 // Event listener saat DOM selesai dimuat
