@@ -51,7 +51,7 @@ function logout() {
   // Hapus status login dan token dari localStorage
   localStorage.removeItem("isLoggedIn");
   localStorage.removeItem("token");
-  deleteCookie("login")
+  window.Cookies.remove("login");
 
   // Redirect ke halaman login atau homepage
   window.location.href = "/bayar-in.github.io/index.html";
@@ -59,7 +59,7 @@ function logout() {
 
 // Fungsi untuk memeriksa status login
 function checkLoginStatus() {
-  const isLoggedIn = getCookie("login");
+  const isLoggedIn = window.Cookies.get("login");
 
   // Jika belum login, tampilkan alert dan redirect ke halaman login
   if (isLoggedIn) {
