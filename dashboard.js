@@ -64,7 +64,12 @@ function checkLoginStatus() {
   // Jika belum login, tampilkan alert dan redirect ke halaman login
   if (isLoggedIn) {
         // Jika cookie ada, redirect ke dashboard
-        window.location.href = "/dashboard"; // Ganti dengan URL dashboard Anda
+        Swal.fire({
+          title: "Sukses",
+          text: "Login Berhasil!!",
+          icon: "success",
+          confirmButtonText: "OK",
+      }) // Ganti dengan URL dashboard Anda
     } else {
         // Jika cookie tidak ada, tampilkan alert atau lakukan tindakan lain
         Swal.fire({
