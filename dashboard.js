@@ -129,35 +129,53 @@ document.addEventListener("DOMContentLoaded", () => {
 //     }).then((response) => response.json());
 // }
 
-const apiUrl =
-  "https://asia-southeast2-awangga.cloudfunctions.net/bayarin/data/user"; // Ganti dengan URL endpoint Anda
+document.addEventListener("DOMContentLoaded", function () {
+  // URL endpoint API
+  const apiUrl =
+    "https://asia-southeast2-awangga.cloudfunctions.net/bayarin/data/user"; // Ganti dengan endpoint sebenarnya
 
-// Fungsi untuk fetch data user
-async function fetchUserData() {
-  try {
-    const response = await fetch(apiUrl);
-    if (!response.ok) throw new Error("Failed to fetch user data");
+  // Fungsi untuk fetch data user dari API
+  async function fetchUserData() {
+    try {
+      const response = await fetch(apiUrl);
 
-    const userData = await response.json();
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
 
-    // Update bagian Profile
-    document.querySelector(".profile img").src =
-      "https://via.placeholder.com/150"; // Tambahkan logic gambar jika tersedia
-    document.querySelector(".profile h2").textContent = userData.name;
-    document.querySelector(".profile p").textContent = userData.role;
+      const userData = await response.json();
 
-    // Update bagian Details
-    const details = document.querySelector(".details .info");
-    details.innerHTML = `
-        <h3>Personal Information</h3>
-        <p><span>Name:</span> ${userData.name}</p>
-        <p><span>Email:</span> ${userData.email}</p>
-        <p><span>Phone:</span> ${userData.phonenumber}</p>
-      `;
-  } catch (error) {
-    console.error("Error:", error);
+      // Update elemen di DOM
+      updateProfileSection(userData);
+    } catch (error) {
+      console.error("Failed to fetch user data:", error);
+    }
   }
-}
 
-// Panggil fungsi fetch saat halaman selesai dimuat
-window.onload = fetchUserData;
+  // Fungsi untuk memperbarui profile section
+  function updateProfileSection(user) {
+    // Update foto profil (jika ada URL untuk foto profil)
+    const profileImg = document.querySelector(".profile img");
+    profileImg.src = user.profilePicture || "https://via.placeholder.com/150"; // Default jika tidak ada foto
+
+    // Update nama
+    const profileName = document.querySelector(".profile h2");
+    profileName.textContent = user.name;
+
+    // Update pekerjaan (role)
+    const profileRole = document.querySelector(".profile p");
+    profileRole.textContent = user.role;
+
+    // Update informasi personal
+    const infoName = document.querySelector(".info p:nth-child(2)");
+    const infoEmail = document.querySelector(".info p:nth-child(3)");
+    const infoPhone = document.querySelector(".info p:nth-child(4)");
+
+    infoName.innerHTML = `<span>Name:</span> ${user.name}`;
+    infoEmail.innerHTML = `<span>Email:</span> ${user.email}`;
+    infoPhone.innerHTML = `<span>Phone:</span> ${user.phonenumber}`;
+  }
+
+  // Panggil fungsi fetch data user
+  fetchUserData();
+});
