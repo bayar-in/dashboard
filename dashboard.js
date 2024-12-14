@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function updateProfileSection(user) {
     // Update foto profil default (karena data API tidak menyertakan profilePicture)
     const profileImg = document.querySelector(".profile img");
-    profileImg.src = "https://via.placeholder.com/150"; // Gunakan foto default
+    profileImg.src = "./assets/img/profile.png"; // Gunakan foto default
 
     // Update nama di bagian profile
     const profileName = document.querySelector(".profile h2");
