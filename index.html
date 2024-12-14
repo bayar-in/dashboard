@@ -107,7 +107,10 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/bayar-in.github.io/src/page/maps/index.html">
+              <a
+                class="nav-link"
+                href="/bayar-in.github.io/src/page/maps/index.html"
+              >
                 <i class="bi bi-globe-americas"></i> Maps
               </a>
             </li>
@@ -120,27 +123,29 @@
         </div>
 
         <!-- Profile Section -->
-        <div class="col-md-10 profile-container">
-          <div class="profile-box">
-            <!-- Profile Section -->
-            <div class="profile">
-              <img
-                src="https://via.placeholder.com/150"
-                alt="Profile Picture"
-              />
-              <h2>Name Surname</h2>
-              <p>Web Developer</p>
-            </div>
+        <!-- Profile Section -->
+        <div class="profile" id="profile-section">
+          <img
+            src="https://via.placeholder.com/150"
+            alt="Profile Picture"
+            id="profile-picture"
+          />
+          <h2 id="profile-name">Name Surname</h2>
+          <p id="profile-role">Web Developer</p>
+        </div>
 
-            <!-- Details Section -->
-            <div class="details">
-              <div class="info">
-                <h3>Personal Information</h3>
-                <p><span>Name:</span> Anonim</p>
-                <p><span>Email:</span> Anonim@example.com</p>
-                <p><span>Phone:</span> +123 456 7890</p>
-              </div>
-            </div>
+        <!-- Details Section -->
+        <div class="details" id="details-section">
+          <div class="info">
+            <h3>Personal Information</h3>
+            <p><span>Name:</span> <span id="user-name"></span></p>
+            <p>
+              <span>Email:</span>
+              <span id="user-email"></span>
+            </p>
+            <p>
+              <span>Phone:</span> <span id="user-phone"></span>
+            </p>
           </div>
         </div>
       </div>

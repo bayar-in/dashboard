@@ -63,24 +63,24 @@ function checkLoginStatus() {
 
   // Jika belum login, tampilkan alert dan redirect ke halaman login
   if (isLoggedIn) {
-        // Jika cookie ada, redirect ke dashboard
-        Swal.fire({
-          title: "Sukses",
-          text: "Login Berhasil!!",
-          icon: "success",
-          confirmButtonText: "OK",
-      }) // Ganti dengan URL dashboard Anda
-    } else {
-        // Jika cookie tidak ada, tampilkan alert atau lakukan tindakan lain
-        Swal.fire({
-            title: "Akses Ditolak",
-            text: "Anda belum login. Silakan login terlebih dahulu.",
-            icon: "warning",
-            confirmButtonText: "OK",
-        }).then(() => {
-            window.location.href = "/login"; // Redirect ke halaman login
-        });
-    }
+    // Jika cookie ada, redirect ke dashboard
+    Swal.fire({
+      title: "Sukses",
+      text: "Login Berhasil!!",
+      icon: "success",
+      confirmButtonText: "OK",
+    }); // Ganti dengan URL dashboard Anda
+  } else {
+    // Jika cookie tidak ada, tampilkan alert atau lakukan tindakan lain
+    Swal.fire({
+      title: "Akses Ditolak",
+      text: "Anda belum login. Silakan login terlebih dahulu.",
+      icon: "warning",
+      confirmButtonText: "OK",
+    }).then(() => {
+      window.location.href = "/login"; // Redirect ke halaman login
+    });
+  }
 }
 
 // Event listener saat DOM selesai dimuat
@@ -128,3 +128,36 @@ document.addEventListener("DOMContentLoaded", () => {
 //         },
 //     }).then((response) => response.json());
 // }
+
+const apiUrl =
+  "https://asia-southeast2-awangga.cloudfunctions.net/bayarin/data/user"; // Ganti dengan URL endpoint Anda
+
+// Fungsi untuk fetch data user
+async function fetchUserData() {
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) throw new Error("Failed to fetch user data");
+
+    const userData = await response.json();
+
+    // Update bagian Profile
+    document.querySelector(".profile img").src =
+      "https://via.placeholder.com/150"; // Tambahkan logic gambar jika tersedia
+    document.querySelector(".profile h2").textContent = userData.name;
+    document.querySelector(".profile p").textContent = userData.role;
+
+    // Update bagian Details
+    const details = document.querySelector(".details .info");
+    details.innerHTML = `
+        <h3>Personal Information</h3>
+        <p><span>Name:</span> ${userData.name}</p>
+        <p><span>Email:</span> ${userData.email}</p>
+        <p><span>Phone:</span> ${userData.phonenumber}</p>
+      `;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+// Panggil fungsi fetch saat halaman selesai dimuat
+window.onload = fetchUserData;
