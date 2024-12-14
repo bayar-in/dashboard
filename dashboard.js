@@ -170,22 +170,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Fungsi untuk memperbarui profile section
   function updateProfileSection(user) {
+    // Update foto profil default (karena data API tidak menyertakan profilePicture)
     const profileImg = document.querySelector(".profile img");
-    profileImg.src = user.profilePicture || "https://via.placeholder.com/150";
+    profileImg.src = "https://via.placeholder.com/150"; // Gunakan foto default
 
+    // Update nama di bagian profile
     const profileName = document.querySelector(".profile h2");
-    profileName.textContent = user.name;
+    profileName.textContent = user.name || "No Name";
 
+    // Update role (pekerjaan) di bagian profile
     const profileRole = document.querySelector(".profile p");
-    profileRole.textContent = user.role;
+    profileRole.textContent = user.role || "No Role";
 
+    // Update informasi personal di bagian details
     const infoName = document.querySelector(".info p:nth-child(2)");
     const infoEmail = document.querySelector(".info p:nth-child(3)");
     const infoPhone = document.querySelector(".info p:nth-child(4)");
 
-    infoName.innerHTML = `<span>Name:</span> ${user.name}`;
-    infoEmail.innerHTML = `<span>Email:</span> ${user.email}`;
-    infoPhone.innerHTML = `<span>Phone:</span> ${user.phonenumber}`;
+    infoName.innerHTML = `<span>Name:</span> ${user.name || "No Name"}`;
+    infoEmail.innerHTML = `<span>Email:</span> ${user.email || "No Email"}`;
+    infoPhone.innerHTML = `<span>Phone:</span> ${
+      user.phonenumber || "No Phone"
+    }`;
   }
 
   // Panggil fungsi fetch data user
