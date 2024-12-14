@@ -132,12 +132,28 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", function () {
   // URL endpoint API
   const apiUrl =
-    "https://asia-southeast2-awangga.cloudfunctions.net/bayarin/data/user"; // Ganti dengan endpoint sebenarnya
+    "https://asia-southeast2-awangga.cloudfunctions.net/bayarin/data/user"; // Endpoint API sebenarnya
 
   // Fungsi untuk fetch data user dari API
   async function fetchUserData() {
     try {
-      const response = await fetch(apiUrl);
+      // Ambil token dari cookies dengan key 'login'
+      const token = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("login="))
+        ?.split("=")[1];
+
+      if (!token) {
+        throw new Error("Token 'login' not found in cookies");
+      }
+
+      const response = await fetch(apiUrl, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`, // Token dikirim di Header Authorization
+          "Content-Type": "application/json",
+        },
+      });
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
