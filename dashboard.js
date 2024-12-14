@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const response = await fetch(apiUrl, {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${token}`, // Token dikirim di Header Authorization
+          login: `${token}`, // Token dikirim di header login
           "Content-Type": "application/json",
         },
       });
@@ -170,19 +170,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Fungsi untuk memperbarui profile section
   function updateProfileSection(user) {
-    // Update foto profil (jika ada URL untuk foto profil)
     const profileImg = document.querySelector(".profile img");
-    profileImg.src = user.profilePicture || "https://via.placeholder.com/150"; // Default jika tidak ada foto
+    profileImg.src = user.profilePicture || "https://via.placeholder.com/150";
 
-    // Update nama
     const profileName = document.querySelector(".profile h2");
     profileName.textContent = user.name;
 
-    // Update pekerjaan (role)
     const profileRole = document.querySelector(".profile p");
     profileRole.textContent = user.role;
 
-    // Update informasi personal
     const infoName = document.querySelector(".info p:nth-child(2)");
     const infoEmail = document.querySelector(".info p:nth-child(3)");
     const infoPhone = document.querySelector(".info p:nth-child(4)");
