@@ -39,8 +39,11 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/bayar-in.github.io/src/page/maps/index.html">
-                <i class="bi bi-globe-americas"></i> Maps
+              <a
+                class="nav-link"
+                href="/bayar-in.github.io/src/page/maps/index.html"
+              >
+                <i class="bi bi-globe"></i> Maps
               </a>
             </li>
             <li class="nav-item">
@@ -153,52 +156,60 @@
     <script src="./../../../assets/js/script.js"></script>
     <script>
       function logout() {
-  // Hapus status login dan token dari localStorage
-  localStorage.removeItem("isLoggedIn");
-  localStorage.removeItem("token");
+        // Hapus status login dan token dari localStorage
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("token");
 
-  // Hapus cookies menggunakan js-cookie jika tersedia
-  if (window.Cookies) {
-    Cookies.remove("_ga_B66QPE5BY6", {
-      path: "/",
-      domain: window.location.hostname,
-    });
-    Cookies.remove("_ga", { path: "/", domain: window.location.hostname });
-    Cookies.remove("login", { path: "/", domain: window.location.hostname });
-  }
+        // Hapus cookies menggunakan js-cookie jika tersedia
+        if (window.Cookies) {
+          Cookies.remove("_ga_B66QPE5BY6", {
+            path: "/",
+            domain: window.location.hostname,
+          });
+          Cookies.remove("_ga", {
+            path: "/",
+            domain: window.location.hostname,
+          });
+          Cookies.remove("login", {
+            path: "/",
+            domain: window.location.hostname,
+          });
+        }
 
-  // Redirect ke halaman login atau homepage
-  window.location.href = "/bayar-in.github.io/index.html";
-}
+        // Redirect ke halaman login atau homepage
+        window.location.href = "/bayar-in.github.io/index.html";
+      }
 
-// Fungsi untuk memeriksa status login
-function checkLoginStatus() {
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
-  const isLogIn = cookies.getItem("isLogIn")
+      // Fungsi untuk memeriksa status login
+      function checkLoginStatus() {
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+        const isLogIn = cookies.getItem("isLogIn");
 
-  // Jika belum login, redirect ke halaman login
-  if (isLoggedIn !== "true") {
-    window.location.href = "/bayar-in.github.io/src/page/login/login.html";
-  }
-  if (isLogIn !== "true") {
-    window.location.href = "/bayar-in.github.io/src/page/login/login.html";
-  }
-}
+        // Jika belum login, redirect ke halaman login
+        if (isLoggedIn !== "true") {
+          window.location.href =
+            "/bayar-in.github.io/src/page/login/login.html";
+        }
+        if (isLogIn !== "true") {
+          window.location.href =
+            "/bayar-in.github.io/src/page/login/login.html";
+        }
+      }
 
-// Event listener saat DOM selesai dimuat
-document.addEventListener("DOMContentLoaded", () => {
-  // Periksa status login
-  checkLoginStatus();
+      // Event listener saat DOM selesai dimuat
+      document.addEventListener("DOMContentLoaded", () => {
+        // Periksa status login
+        checkLoginStatus();
 
-  // Tambahkan event listener ke tombol logout
-  const logoutLinks = document.querySelectorAll('[onclick="logout()"]');
-  logoutLinks.forEach((link) => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault(); // Cegah default link behavior
-      logout();
-    });
-  });
-});
+        // Tambahkan event listener ke tombol logout
+        const logoutLinks = document.querySelectorAll('[onclick="logout()"]');
+        logoutLinks.forEach((link) => {
+          link.addEventListener("click", (e) => {
+            e.preventDefault(); // Cegah default link behavior
+            logout();
+          });
+        });
+      });
     </script>
   </body>
 </html>
